@@ -1,3 +1,3 @@
 #!/bin/bash -x
-digit=$((RANDAM%9))
+digit=$((RANDOM%9))
 echo $digit

@@ -1,28 +1,31 @@
-#!/bin/bash
+#!/bin/bash -x
+echo -n "Enter number : "
+read n
 
-for number do
-    w=0         # Hamming weight (count of bits that are 1)
-    n=$number   # work on $n to save $number for later
+len=$(echo $n | wc -c)
+len=$(( $len - 1 ))
 
-    # test the last bit of the number, and right-shift once
-    # repeat until number is zero
-    while (( n > 0 )); do
-        if (( (n & 1) == 1 )); then
-            # last bit was 1, count it
-            w=$(( w + 1 ))
-        fi
-
-        if (( w > 1 )); then
-            # early bail-out: not a power of 2
-            break
-        fi
-
-        # right-shift number
-        n=$(( n >> 1 ))
-    done
-
-    if (( w == 1 )); then
-        # this was a power of 2
-        printf '%d\n' "$number"
-    fi
+echo "Your number $n in words : "
+for (( i=1; i<=$len; i++ ))
+do
+                                              
+   # get one digit at a time
+    digit=$(echo $n | cut -c $i)
+   # use case control structure to find digit equivalent in words
+    case $digit in
+        0) echo -n "zero " ;;
+        1) echo -n "one " ;;
+        2) echo -n "two " ;;
+        3) echo -n "three " ;;
+        4) echo -n "four " ;;
+        5) echo -n "five " ;;
+        6) echo -n "six " ;;
+        7) echo -n "seven " ;;
+        8) echo -n "eight " ;;
+        9) echo -n "nine " ;;
+    esac
 done
+
+# just print new line
+echo ""
+
